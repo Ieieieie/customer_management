@@ -1,0 +1,32 @@
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+            <th scope="col">名前</th>
+            <th scope="col">住所</th>
+            <th scope="col">電話番号</th>
+            <th scope="col">墓園名称</th>
+            <th scope="col">区画</th>
+            <th scope="col">工事請負内容</th>
+            <th scope="col">備考</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @histories.each do |history| %>
+                <tr data-link="<%= edit_history_path(history.id) %>">
+                    <td><%= history.name %></td>
+                    <td><%= "〒" + history.postcode.to_s + " " + JpPrefecture::Prefecture.find(history.prefecture_code).name + history.address_city + history.address_street + history.address_building%></td>
+                    <td><%= history.telno %></td>
+                    <td><%= history.cemetery_name %></td>
+                    <td><%= history.section %></td>
+                    <td><%= history.contract_details %></td>
+                    <td><%= simple_format(history.remarks) %></td>
+                    <td>
+                        <%= link_to '編集', edit_history_path(history.id), class: 'btn btn-success margin-right-10' %>
+                        <%= link_to '削除', history_path(history.id), method: :delete, data: {confirm: '削除してもよろしいですか？'}, class: 'btn btn-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

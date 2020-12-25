@@ -1,0 +1,77 @@
+<div class="padding-left-30">
+        <%= form_for(@history, url: history_index_path, method: :post) do |f| %>
+            <div class="flex">
+                <div class="form-group padding-top-15" >
+                    <%= f.label :name, '氏名' %>
+                    <%= f.text_field :name, class: 'form-control', id: 'name' %>
+                </div>
+                <div class="form-group padding-top-15" >
+                    <%= f.label :yomigana, '読み仮名' %>
+                    <%= f.text_field :yomigana, class: 'form-control', id: 'yomigana' %>
+                </div>
+            </div>
+            
+            <div class="form-group padding-top-15">
+                <%= f.label :postcode, '郵便番号' %>
+                <div class="flex">
+                    <%= f.text_field :postcode, autocomplete: 'postcode', class: 'form-control margin-right-20', id: 'postcode' %>
+                    <%= button_tag '住所から郵便番号を検索', type: 'button', class: 'btn btn-primary', id: 'address_to_postcode' %>
+                </div>
+            </div>
+            <div class="form-group padding-top-15" >
+                <%= f.label :prefecture_name, '都道府県' %>
+                
+                <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, class: 'form-control', id: "prefecture_code" %>
+            </div>
+            <div class="form-group padding-top-15" >
+                <%= f.label :address_city, '市区町村' %>
+                <%= f.text_field :address_city, autocomplete: 'address_city', class: 'form-control', id: 'address_city' %>
+            </div>
+            <div class="flex">
+                <div class="form-group padding-top-15" >
+                    <%= f.label :address_street, '番地' %>
+                    <%= f.text_field :address_street, autocomplete: 'address_street', class: 'form-control', id: 'address_street' %>
+                </div>
+                <div class="form-group padding-top-15" >
+                    <%= f.label :address_building, '建物' %>
+                    <%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control', id: 'address_building' %>
+                </div>
+            </div>
+            
+            <div class="form-group padding-top-15">
+                <%= f.label :telno, '電話番号' %>
+                <%= f.text_field :telno, class: 'form-control', id: 'telno' %>
+            </div>
+            <div class="form-group padding-top-15">
+                <%= f.label :cemetery_name, '墓園名称' %>
+                <div class="flexbox">
+                    <div class="cemetery-name-other-box">
+                        <%= f.text_field :cemetery_name, class: 'form-control', :placeholder => 'その他', id: 'cemetery_name_other' %>
+                    </div>
+                    <div class="cemetery-name-radio-button-box">
+                        <label><%= f.radio_button :cemetery_name, "北山", id: "cemetery_radiobutton", id: 'cemetery_radio_button' %>北山</label>
+                        <label><%= f.radio_button :cemetery_name, "聖山", id: "cemetery_radiobutton", id: 'cemetery_radio_button' %>聖山</label>
+                        <label><%= f.radio_button :cemetery_name, "東の杜", id: "cemetery_radiobutton", id: 'cemetery_radio_button' %>東の杜</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group padding-top-15" >
+                <%= f.label :section, '区画' %>
+                <%= f.text_field :section, class: 'form-control', :placeholder => '第◯区〇〇-〇〇', id: 'section' %>
+            </div>
+            <div class="form-group padding-top-15">
+                <%= f.label :contract_details, '工事請負内容' %>
+                <div class="radio_button_box">
+                    <label><%= f.radio_button :contract_details, "墓石工事", id: 'contract_radio_button', checked: true %>墓石工事</label>
+                    <label><%= f.radio_button :contract_details, "戒名彫", id: 'contract_radio_button' %>戒名彫</label>
+                    <label><%= f.radio_button :contract_details, "墓石清掃", id: 'contract_radio_button' %>墓石清掃</label>
+                    <label><%= f.radio_button :contract_details, "その他工事", id: 'contract_radio_button' %>その他工事</label>
+                </div>
+            </div>
+            <div class="form-group padding-top-15" >
+                <%= f.label :remarks, '備考' %>
+                <%= f.text_area :remarks, class: 'form-control', id: 'remarks' %>
+            </div>
+            <%= f.submit class: 'btn btn-success regist-button' %>
+    <% end %>
+    </div>
